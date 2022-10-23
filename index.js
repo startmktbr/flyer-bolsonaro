@@ -20,7 +20,7 @@ function getName() {
 function drawImage() {
   canvasContext.drawImage(flyerBaseImage, 0, 0);
   canvasContext.fillStyle = '#fff';
-  canvasContext.font = 'bold 102px var(--montserrat)'
+  canvasContext.font = 'bold 102px "montserrat", sans-serif'
   canvasContext.fillText(getName(), 60, 470);
 }
 
@@ -39,3 +39,5 @@ $nameFormButton.addEventListener('pointerdown', () => {
   drawImage();
   saveImage();
 });
+
+drawImage();
