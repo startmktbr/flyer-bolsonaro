@@ -1,44 +1,57 @@
 'use strict'
 
-/** @type {HTMLInputElement} */
-const $nameFormInput = document.querySelector('.js-name-form-input');
-/** @type {HTMLButtonElement} */
-const $nameFormButton = document.querySelector('.js-name-form-button');
-/** @type {HTMLCanvasElement} */
-const $canvas = document.querySelector('.js-canvas');
-const $downloadLink = document.querySelector('.js-download-link');
+class CanvasFlyer {
+  #nameInputElement;
+  #downloadButtonElement;
+  #canvasContainerElement;
+  #canvasElement;
+  #imageSource;
 
-const canvasContext = $canvas.getContext('2d');
+  /**
+   * @param {HTMLInputElement} nameInputElement
+   * @param {HTMLButtonElement} downloadButtonElement
+   * @param {string} imageSource
+   * @param {HTMLCanvasElement} canvasElement
+   * @param {HTMLDivElement} canvasContainerElement
+   */
+  constructor(
+      nameInputElement,
+      downloadButtonElement,
+      imageSource,
+      canvasElement,
+      canvasContainerElement,
+  ) {
+    this.#nameInputElement = nameInputElement;
+    this.#downloadButtonElement = downloadButtonElement;
+    this.#imageSource = imageSource;
+    this.#canvasElement = canvasElement;
+    this.#canvasContainerElement = canvasContainerElement;
 
-const flyerBaseImage = new Image();
-flyerBaseImage.src = 'flyer-base.jpg';
-console.log(flyerBaseImage);
+    window.addEventListener('load', () => {
+      this.resizeCanvasElement();
+    });
 
-function getName() {
-  return $nameFormInput.value.toUpperCase() || 'SEM NOME';
+    window.addEventListener('resize', () => {
+      this.resizeCanvasElement();
+    });
+  }
+
+  resizeCanvasElement() {
+    this.#canvasElement.width = this.#canvasContainerElement.offsetWidth;
+    this.#canvasElement.height = this.#canvasContainerElement.offsetHeight;
+  }
 }
 
-function drawImage() {
-  canvasContext.drawImage(flyerBaseImage, 0, 0);
-  canvasContext.fillStyle = '#fff';
-  canvasContext.font = 'bold 85px "montserrat", sans-serif'
-  canvasContext.fillText(getName(), 67, 430);
-}
+const nameInputElement = document.querySelector('.js-name-form-input');
+const downloadButtonElement = document.querySelector('.js-name-form-button');
+const canvasContainerElement = document.querySelector('.js-container');
+const canvasElement = document.querySelector('.js-canvas');
+const imageSource = 'flyer-base.jpg';
 
-function saveImage() {
-  const url = $canvas.toDataURL();
-  $downloadLink.href = url;
-  $downloadLink.download = `flyer-${getName()}.jpg`;
-  $downloadLink.click();
-}
-
-$nameFormInput.addEventListener('input', () => {
-  drawImage();
-});
-
-$nameFormButton.addEventListener('pointerdown', () => {
-  drawImage();
-  saveImage();
-});
-
-drawImage();
+const canvasFlyer = new CanvasFlyer(
+    nameInputElement,
+    downloadButtonElement,
+    imageSource,
+    canvasElement,
+    canvasContainerElement,
+);

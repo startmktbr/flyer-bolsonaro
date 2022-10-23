@@ -62,6 +62,5 @@ canvas {
 
 .container {
   margin-inline: auto;
-  overflow: hidden;
   width: min(90%, 1000px);
 }
