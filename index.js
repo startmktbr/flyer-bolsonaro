@@ -12,13 +12,15 @@ const canvasContext = $canvas.getContext('2d');
 const flyerBaseImage = new Image();
 flyerBaseImage.src = 'flyer-base.jpg';
 
+function getName() {
+  return $nameFormInput.value.toUpperCase() || 'SEM NOME';
+}
+
 function drawImage() {
-  const name = $nameFormInput.value || 'Sem nome';
   canvasContext.drawImage(flyerBaseImage, 0, 0);
-  
   canvasContext.fillStyle = '#fff';
   canvasContext.font = 'bold 102px var(--montserrat)'
-  canvasContext.fillText(name.toUpperCase(), 60, 470);
+  canvasContext.fillText(getName(), 60, 470);
 }
 
 $nameFormButton.addEventListener('pointerdown', () => {
