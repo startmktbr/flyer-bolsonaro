@@ -34,31 +34,36 @@ class CanvasFlyerApp {
     this.#canvasElement = canvasElement;
     this.#canvasContainerElement = canvasContainerElement;
 
-    this.#nameInputElement.addEventListener('input', () => {
-      this.drawCanvasElement();
+    this.#nameInputElement.addEventListener('input', async () => {
+      await this.drawCanvasElement();
     });
 
-    window.addEventListener('load', () => {
-      this.drawCanvasElement();
+    this.#downloadButtonElement.addEventListener('pointerdown', async () => {
+      await this.downloadImage();
     });
 
-    window.addEventListener('resize', () => {
-      this.drawCanvasElement();
+    window.addEventListener('load', async () => {
+      await this.drawCanvasElement();
+    });
+
+    window.addEventListener('resize', async () => {
+      await this.drawCanvasElement();
     });
   }
 
   /**
    * Creates the canvas element and draw with its contents.
    */
-  drawCanvasElement() {
-    this.resizeCanvasElement();
-    this.drawImageAndText();
+  async drawCanvasElement() {
+    this.resizeCanvasElementToContainer();
+    await this.drawImageAndText();
+    this.drawText();
   }
 
   /**
    * Recreate the canvas element to fit inside its container.
    */
-  resizeCanvasElement() {
+  resizeCanvasElementToContainer() {
     this.#canvasElement.width = this.#canvasContainerElement.offsetWidth;
     this.#canvasElement.height = this.#canvasContainerElement.offsetWidth;
   }
@@ -66,28 +71,37 @@ class CanvasFlyerApp {
   /**
    * Draws the image in the canvas element.
    */
-  drawImageAndText() {
-    const canvasContext = this.#canvasElement.getContext('2d');
-
-    const imageElement = new Image();
-    imageElement.src = this.#imageSource;
-
-    imageElement.addEventListener('load', () => {
-      canvasContext.drawImage(
-          imageElement,
-          0,
-          0,
-          this.#canvasElement.width,
-          this.#canvasElement.height,
-      );
-      this.drawText();
+  async drawImageAndText() {
+    return new Promise((resolve, _reject) => {
+      const canvasContext = this.#canvasElement.getContext('2d');
+  
+      const imageElement = new Image();
+      imageElement.src = this.#imageSource;
+  
+      imageElement.addEventListener('load', () => {
+        canvasContext.drawImage(
+            imageElement,
+            0,
+            0,
+            this.#canvasElement.width,
+            this.#canvasElement.height,
+        );
+        resolve();
+      });
     });
   }
 
+  /**
+   * Gets the person's name from the input or use a default one. 
+   * @returns The person's name or a default one.
+   */
   getName() {
     return this.#nameInputElement.value.toUpperCase() || 'SEM NOME';
   }
 
+  /**
+   * Draws the text containing the person's name in the canvas element.
+   */
   drawText() {
     const canvasContext = this.#canvasElement.getContext('2d');
     canvasContext.fillStyle = '#fff';
@@ -97,6 +111,20 @@ class CanvasFlyerApp {
         this.#canvasElement.width * 0.07,
         this.#canvasElement.height * 0.42,
     );
+  }
+
+  /**
+   * Downloads the image to the client's device.
+   */
+  async downloadImage() {
+    const downloadUrl = this.#canvasElement.toDataURL();
+    
+    const downloadAnchor = document.createElement('a');
+    downloadAnchor.download =
+        `flyer-bolsonaro-${this.getName().replace(/ /g, '-')}.png`;
+    downloadAnchor.href = downloadUrl;
+    
+    downloadAnchor.click();
   }
 }
 
