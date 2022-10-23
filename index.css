@@ -1,4 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+:root {
+  font-size: clamp(16px, 2vw, 18px);
+}
 
 * {
   box-sizing: border-box;
@@ -7,11 +12,12 @@
 body,
 button,
 input {
-  font-family: sans-serif;
+  font-family: 'roboto', sans-serif;
 }
 
 body {
   background-color: hsl(0, 0%, 10%);
+  height: 100vh;
 }
 
 canvas {
@@ -20,20 +26,25 @@ canvas {
 }
 
 .nameForm {
-  margin-inline: auto;
-  width: fit-content;
-  margin-top: 2rem;
-  display: flex;
   align-items: center;
+  display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  margin-inline: auto;
+  margin-top: 2rem;
 }
 
 .nameForm-input {
-  font-size: 0.9rem;
-  padding: 0.5rem 0.3rem;
+  border-radius: 5px;
+  border: 1px solid black;
   display: block;
+  font-size: 1rem;
+  padding: 0.9rem 0.5rem;
   width: 100%;
+}
+
+.nameForm-input:focus {
+  outline: 2px solid hsl(41, 100%, 55%);
 }
 
 .nameForm-button {
@@ -43,13 +54,14 @@ canvas {
   color: white;
   cursor: pointer;
   font-size: 0.9rem;
-  padding: 10px 20px;
+  font-weight: 700;
+  padding: 1rem 2rem;
   text-transform: uppercase;
   width: 100%;
 }
 
 .container {
   margin-inline: auto;
-  width: min(90%, 900px);
   overflow: hidden;
+  width: min(90%, 1000px);
 }
