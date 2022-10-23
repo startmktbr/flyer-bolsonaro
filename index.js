@@ -34,6 +34,10 @@ class CanvasFlyerApp {
     this.#canvasElement = canvasElement;
     this.#canvasContainerElement = canvasContainerElement;
 
+    this.#nameInputElement.addEventListener('input', () => {
+      this.drawCanvasElement();
+    });
+
     window.addEventListener('load', () => {
       this.drawCanvasElement();
     });
@@ -48,7 +52,7 @@ class CanvasFlyerApp {
    */
   drawCanvasElement() {
     this.resizeCanvasElement();
-    this.drawImage();
+    this.drawImageAndText();
   }
 
   /**
@@ -62,7 +66,7 @@ class CanvasFlyerApp {
   /**
    * Draws the image in the canvas element.
    */
-  drawImage() {
+  drawImageAndText() {
     const canvasContext = this.#canvasElement.getContext('2d');
 
     const imageElement = new Image();
@@ -76,7 +80,23 @@ class CanvasFlyerApp {
           this.#canvasElement.width,
           this.#canvasElement.height,
       );
+      this.drawText();
     });
+  }
+
+  getName() {
+    return this.#nameInputElement.value.toUpperCase() || 'SEM NOME';
+  }
+
+  drawText() {
+    const canvasContext = this.#canvasElement.getContext('2d');
+    canvasContext.fillStyle = '#fff';
+    canvasContext.font = `bold min(5vw, 60px) "montserrat", sans-serif`;
+    canvasContext.fillText(
+        this.getName(),
+        this.#canvasElement.width * 0.07,
+        this.#canvasElement.height * 0.42,
+    );
   }
 }
 
