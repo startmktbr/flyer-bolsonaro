@@ -96,7 +96,7 @@ class CanvasFlyerApp {
    * @returns The person's name or a default one.
    */
   getName() {
-    return this.#nameInputElement.value.toUpperCase() || 'SEM NOME';
+    return this.#nameInputElement.value.toUpperCase() || 'SEU NOME';
   }
 
   /**
