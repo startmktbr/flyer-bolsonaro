@@ -11,3 +11,9 @@ body {
 canvas {
   background-color: white;
 }
+
+input[type='text'] {
+  font-size: 0.9rem;
+  padding: 5px 10px;
+  height: 30px;
+}

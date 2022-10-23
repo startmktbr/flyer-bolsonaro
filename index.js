@@ -31,6 +31,10 @@ function saveImage() {
   $downloadLink.click();
 }
 
+$nameFormInput.addEventListener('input', () => {
+  drawImage();
+});
+
 $nameFormButton.addEventListener('pointerdown', () => {
   drawImage();
   saveImage();
