@@ -12,6 +12,7 @@ const canvasContext = $canvas.getContext('2d');
 
 const flyerBaseImage = new Image();
 flyerBaseImage.src = 'flyer-base.jpg';
+console.log(flyerBaseImage);
 
 function getName() {
   return $nameFormInput.value.toUpperCase() || 'SEM NOME';
@@ -20,8 +21,8 @@ function getName() {
 function drawImage() {
   canvasContext.drawImage(flyerBaseImage, 0, 0);
   canvasContext.fillStyle = '#fff';
-  canvasContext.font = 'bold 102px "montserrat", sans-serif'
-  canvasContext.fillText(getName(), 60, 470);
+  canvasContext.font = 'bold 85px "montserrat", sans-serif'
+  canvasContext.fillText(getName(), 67, 430);
 }
 
 function saveImage() {
