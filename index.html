@@ -8,11 +8,18 @@
     <script src="index.js" defer></script>
   </head>
   <body>
-    <div class="nameForm">
-      <input type="text" class="js-name-form-input nameForm-input" />
-      <button class="js-name-form-button nameForm-button" type="button">Salvar image</button>
+    <div class="container">
+      <div class="nameForm">
+        <input
+            type="text"
+            class="js-name-form-input nameForm-input"
+            placeholder="Digite seu nome aqui"
+            maxlength="8"
+        />
+        <button class="js-name-form-button nameForm-button" type="button">Salvar image</button>
+      </div>
+      <canvas class="js-canvas" width="1000" height="1000"></canvas>
+      <a href="#" class="js-download-link" download="image.jpg"></a>
     </div>
-    <canvas class="js-canvas" width="1000" height="1000"></canvas>
-    <a href="#" class="js-download-link" download="image.jpg"></a>
   </body>
 </html>
