@@ -43,7 +43,7 @@ canvas {
 }
 
 .nameForm-input:focus {
-  outline: 2px solid hsl(41, 100%, 55%);
+  outline: 3px solid hsl(41, 100%, 55%);
 }
 
 .nameForm-button {
@@ -57,6 +57,10 @@ canvas {
   padding: 1rem 2rem;
   text-transform: uppercase;
   width: 100%;
+}
+
+.nameForm-button:hover {
+  background-color: hsl(162, 99%, 25%);
 }
 
 .container {

@@ -56,7 +56,7 @@ class CanvasFlyerApp {
    */
   async drawCanvasElement() {
     this.resizeCanvasElementToContainer();
-    await this.drawImageAndText();
+    await this.drawImage();
     this.drawText();
   }
 
@@ -71,7 +71,7 @@ class CanvasFlyerApp {
   /**
    * Draws the image in the canvas element.
    */
-  async drawImageAndText() {
+  async drawImage() {
     return new Promise((resolve, _reject) => {
       const canvasContext = this.#canvasElement.getContext('2d');
   
@@ -105,7 +105,8 @@ class CanvasFlyerApp {
   drawText() {
     const canvasContext = this.#canvasElement.getContext('2d');
     canvasContext.fillStyle = '#fff';
-    canvasContext.font = `bold min(5vw, 60px) "montserrat", sans-serif`;
+    canvasContext.font = `bold min(${this.#canvasElement.width * 0.07}px, 60px) "montserrat", sans-serif`;
+
     canvasContext.fillText(
         this.getName(),
         this.#canvasElement.width * 0.07,
@@ -117,6 +118,12 @@ class CanvasFlyerApp {
    * Downloads the image to the client's device.
    */
   async downloadImage() {
+    this.#canvasElement.width = 1000;
+    this.#canvasElement.height = 1000;
+
+    await this.drawImage();
+    this.drawText();
+
     const downloadUrl = this.#canvasElement.toDataURL();
     
     const downloadAnchor = document.createElement('a');
@@ -125,6 +132,8 @@ class CanvasFlyerApp {
     downloadAnchor.href = downloadUrl;
     
     downloadAnchor.click();
+    
+    await this.drawCanvasElement();
   }
 }
 
