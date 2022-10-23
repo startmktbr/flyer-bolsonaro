@@ -6,6 +6,7 @@ const $nameFormInput = document.querySelector('.js-name-form-input');
 const $nameFormButton = document.querySelector('.js-name-form-button');
 /** @type {HTMLCanvasElement} */
 const $canvas = document.querySelector('.js-canvas');
+const $downloadLink = document.querySelector('.js-download-link');
 
 const canvasContext = $canvas.getContext('2d');
 
@@ -23,6 +24,14 @@ function drawImage() {
   canvasContext.fillText(getName(), 60, 470);
 }
 
+function saveImage() {
+  const url = $canvas.toDataURL();
+  $downloadLink.href = url;
+  $downloadLink.download = `flyer-${getName()}.jpg`;
+  $downloadLink.click();
+}
+
 $nameFormButton.addEventListener('pointerdown', () => {
   drawImage();
+  saveImage();
 });
