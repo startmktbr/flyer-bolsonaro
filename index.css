@@ -23,24 +23,33 @@ canvas {
   margin-inline: auto;
   width: fit-content;
   margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .nameForm-input {
   font-size: 0.9rem;
   padding: 0.5rem 0.3rem;
+  display: block;
+  width: 100%;
 }
 
 .nameForm-button {
-  background-color: brown;
+  background-color: hsl(162, 99%, 35%);
   border-radius: 5px;
   border: none;
   color: white;
   cursor: pointer;
   font-size: 0.9rem;
   padding: 10px 20px;
+  text-transform: uppercase;
+  width: 100%;
 }
 
 .container {
   margin-inline: auto;
   width: min(90%, 900px);
+  overflow: hidden;
 }
