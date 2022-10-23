@@ -17,11 +17,10 @@ input {
 
 body {
   background-color: hsl(0, 0%, 10%);
-  height: 100vh;
 }
 
 canvas {
-  background-color: white;
+  background-color: hsl(0, 0%, 10%);
   margin: 3rem 0;
 }
 
